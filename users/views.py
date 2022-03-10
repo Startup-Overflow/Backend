@@ -16,7 +16,9 @@ class RegisterView(APIView):
     def post(self, request, format=None):
         # Collect Data from the Form
         username = request.data["username"]
+        print(username)
         password = request.data["password"]
+        print(password)
         confirm_password = request.data["confirm_password"]
         first_name = request.data["first_name"]
         last_name = request.data["last_name"]
@@ -235,7 +237,17 @@ class GetMeView(APIView):
 
     def get(self, request, name):
         if name=="followings":
-            followers = Follow.objects.all()
+            followers = Follow.objects.filter(username=request.user)
+            user = User.objects.filter(username__in=[i.following for i in followers])
+            serializer = UserSerializer(user, many=True)
+            return Response(serializer.data)
+
+        if name=="followers":
+            followers = Follow.objects.filter(following=request.user)
+            print(followers)
+            user = User.objects.filter(username__in=[i.username for i in followers])
+            serializer = UserSerializer(user, many=True)
+            return Response(serializer.data)
 
 # class FollowHashTag(APIView):
 #     permission_classes = (permissions.IsAuthenticated,)

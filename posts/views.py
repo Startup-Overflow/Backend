@@ -1,4 +1,3 @@
-from audioop import reverse
 from django.shortcuts import get_list_or_404
 from posts.models import *
 from posts.serializers import *
@@ -9,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from hashtag.models import TagFollow
 from users.models import Follow, Hobbies, Interests, Skills
+from notifications.models import Notification
 
 class PostsViewToALL(APIView):
     permission_classes = (AllowAny,)
@@ -42,6 +42,16 @@ class CommentView(APIView):
             posts = posts,
             comment = comment
         )
+
+        noti_to_user = posts.username
+        msg = f"{username.first_name} {username.last_name} commented on {posts.title}"
+        post = posts.id
+        Notification.objects.create(
+            username=noti_to_user,
+            noti = msg,
+            post=post
+        )
+
         return Response({"Comment":comment})
 
 class PostsViewSet(APIView):
@@ -101,6 +111,27 @@ class PostByTagView(APIView):
         return Response(serializer.data)
 
 
+class ViewsByHashtag(APIView):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
+
+    def get(self, requests, hashtag):
+        tags = Hashtag.objects.filter(name=hashtag)
+        post = Posts.objects.filter(hashtag__in = [i for i in tags])
+        serializer = PostSerializer(post, many=True)
+        return Response(serializer.data)
+
+class MyArticleView(APIView):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
+    
+    def get(self, requests, catagory):
+        posts = Posts.objects.filter(username=requests.user).filter(catagory=catagory)
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+#
 # class PostsViewSet(APIView):
 #     permission_classes = (IsAuthenticated,)
 #     authentication_classes = (TokenAuthentication,)

@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'users',
     'hashtag',
     'posts',
-    'questions'
+    'questions',
+    'notifications'
 ]
 
 MIDDLEWARE = [
@@ -118,7 +119,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ujjwal',
         'USER': username,
-        'PASSWORD': password
+        'PASSWORD': password,
     }
 }
 

@@ -58,7 +58,7 @@ class Interests(models.Model):
 
 
 class Follow(models.Model):
-    username = models.ForeignKey(User, on_delete=superuser, related_name='follow_to', null=True)
+    username = models.ForeignKey(User, on_delete=superuser, to_field="username", related_name='follow_to', null=True)
     following = models.ForeignKey(User, on_delete=superuser, related_name='followed_by', null=True)
     
     def __str__(self):

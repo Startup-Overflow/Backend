@@ -1,3 +1,4 @@
+from urllib import response
 from hashtag.models import *
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -6,6 +7,24 @@ from rest_framework.authentication import TokenAuthentication
 import hashlib
 from django.db.utils import IntegrityError
 from hashtag.serializers import *
+
+class HashTagFollow(APIView):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
+
+    def post(self, requests):
+        username=requests.user
+        name = requests.data["name"]
+        desc = requests.data["desc"]
+
+        h = Hashtag.objects.create(
+            username=username,
+            name=name,
+            desc=desc
+        )
+        h.save()
+
+        return Response({"Response":"Success"})
 
 class TagView(APIView):
     permission_classes = (IsAuthenticated,)
