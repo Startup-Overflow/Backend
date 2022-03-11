@@ -11,11 +11,3 @@ class Noti(models.Model):
 
     def __str__(self):
         return self.noti
-
-# class Notifications(models.Model):
-#     username = models.ForeignKey(User, on_delete=models.CASCADE)
-#     noti = models.CharField(max_length=128, null=True)
-#     post = models.ForeignKey(Posts, on_delete=models.CASCADE)
-
-#     def __str__(self):
-#         return self.noti

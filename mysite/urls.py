@@ -11,5 +11,5 @@ urlpatterns = [
     path('posts/',include('posts.urls')),
     path('hashtag/',include('hashtag.urls')),
     path('questions/',include('questions.urls')),
-    path('notifications/',include('notifications.urls')),
+    path('notifications/',include('noti.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

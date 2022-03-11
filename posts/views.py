@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from hashtag.models import TagFollow
 from users.models import Follow, Hobbies, Interests, Skills
-from notifications.models import Notification
+from noti.models import Noti
 
 class PostsViewToALL(APIView):
     permission_classes = (AllowAny,)
@@ -27,6 +27,9 @@ class CommentViewToALL(APIView):
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
 
+import time
+  
+  
 class CommentView(APIView):
     permission_classes = (IsAuthenticated,)
     authentication_classes = (TokenAuthentication,)
@@ -42,11 +45,14 @@ class CommentView(APIView):
             posts = posts,
             comment = comment
         )
+        curr_time = time.localtime()
+        curr_clock = time.strftime("%H:%M:%S", curr_time)
 
         noti_to_user = posts.username
-        msg = f"{username.first_name} {username.last_name} commented on {posts.title}"
-        post = posts.id
-        Notification.objects.create(
+        msg = f"{username.first_name} {username.last_name} commented on {posts.title} at {curr_clock}"
+        post = Posts.objects.get(id=posts.id)
+
+        Noti.objects.create(
             username=noti_to_user,
             noti = msg,
             post=post

@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'hashtag',
     'posts',
     'questions',
-    'notifications'
+    'noti'
 ]
 
 MIDDLEWARE = [
