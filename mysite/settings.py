@@ -118,9 +118,9 @@ DATABASES = {
     }
 }
 
-# if os.environ.get("HEROKU")==1:
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config(default=os.getenv('DATABASE_URL'))
+if os.environ.get("HEROKU")=='1':
+    import dj_database_url
+    DATABASES['default'] =  dj_database_url.config(default=os.getenv('DATABASE_URL'))
 
 # db_from_env = dj_database_url.config(conn_max_age=600)
 # DATABASES['default'].update(db_from_env)
