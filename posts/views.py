@@ -61,7 +61,7 @@ class CommentView(APIView):
         return Response({"Comment":comment})
 
 class PostsViewSet(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     authentication_classes = (TokenAuthentication,)
 
     def get(self, request, catagory=None, format=None):
