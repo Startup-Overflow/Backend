@@ -68,10 +68,11 @@ class PostsViewSet(APIView):
         followings = Follow.objects.filter(username=request.user)
         post = Posts.objects.filter(username=request.user)
                 
-        posts = Posts.objects.filter(
-            username__in=[i.following.username for i in followings]
-            +[i.username for i in post]
-        ).filter(catagory=catagory)
+        posts = Posts.objects.all() 
+        # filter(
+        #     username__in=[i.following.username for i in followings]
+        #     +[i.username for i in post]
+        # ).filter(catagory=catagory)
 
         print([i for i in posts])
         serializer = PostSerializer(posts, many=True)
