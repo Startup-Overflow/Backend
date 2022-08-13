@@ -110,7 +110,6 @@ REST_FRAMEWORK = {
 # with open('secreat.txt','r') as f:
 #     username,password=f.read().split('\n')
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

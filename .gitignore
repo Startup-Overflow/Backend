@@ -1,3 +1,4 @@
 venv/
 secreat.txt
 env/
+__pycache__/
