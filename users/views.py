@@ -9,6 +9,7 @@ from rest_framework.authentication import TokenAuthentication
 from users.models import *
 from users.serializers import *
 from django.db.utils import IntegrityError
+from rest_framework.authtoken.models import Token
 
 class RegisterView(APIView):
     # Anyone Can Register
@@ -16,9 +17,7 @@ class RegisterView(APIView):
     def post(self, request, format=None):
         # Collect Data from the Form
         username = request.data["username"]
-        print(username)
         password = request.data["password"]
-        print(password)
         confirm_password = request.data["confirm_password"]
         first_name = request.data["first_name"]
         last_name = request.data["last_name"]
@@ -51,7 +50,10 @@ class RegisterView(APIView):
         user.save()
         Profile.objects.create(username = User.objects.get(username = username))
 
-        return Response({"Message":"User Created"})
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key})
+
+        # return Response({"Message":"User Created"})
 
 class LogoutView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
