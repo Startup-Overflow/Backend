@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'hashtag',
     'posts',
     'questions',
-    'noti'
+    'noti',
+    'ckeditor',
+    'resources'
 ]
 
 MIDDLEWARE = [
@@ -63,6 +65,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'http://localhost:8080',
     'https://startupoverflow.netlify.app',
 ]
 
@@ -73,7 +76,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'Templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

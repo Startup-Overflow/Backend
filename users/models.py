@@ -21,7 +21,7 @@ class Education(models.Model):
     name = models.CharField(max_length=40)
 
     def __str__(self):
-        return self.name    
+        return self.name
 
 class Hobbies(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
