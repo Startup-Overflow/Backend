@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-an@&i+dshfwz)wj!qo&zu9inlf9rgcuo)(6ik&o!n3607hwe=n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['startupof.herokuapp.com']
 
 
 # Application definition
@@ -68,7 +68,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://localhost:8080',
-    'https://startupoverflow.netlify.app',
+    'https://startupoverflowweb.netlify.app',
 ]
 
 # CORS_ORIGIN_ALLOW_ALL=True
@@ -181,6 +181,3 @@ CORS_ALLOW_CREDENTIALS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-TIME_ZONE = 'Asia/Kolkata'
