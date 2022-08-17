@@ -67,7 +67,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://localhost:8080',
-    'https://startupoverflow.netlify.app',
+    'https://startupoverflowweb.netlify.app',
 ]
 
 # CORS_ORIGIN_ALLOW_ALL=True
