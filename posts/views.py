@@ -68,17 +68,18 @@ class CommentView(APIView):
         return Response({"Comment":comment})
 
 class PostsViewSet(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     authentication_classes = (TokenAuthentication,)
 
     def get(self, request, catagory=None, format=None):
         followings = Follow.objects.filter(username=request.user)
         post = Posts.objects.filter(username=request.user)
                 
-        posts = Posts.objects.filter(
-            username__in=[i.following.username for i in followings]
-            +[i.username for i in post]
-        ).filter(catagory=catagory)
+        posts = Posts.objects.all()
+        # filter(
+        #     username__in=[i.following.username for i in followings]
+        #     +[i.username for i in post]
+        # ).filter(catagory=catagory)
 
         print([i for i in posts])
         serializer = PostSerializer(posts, many=True)
