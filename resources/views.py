@@ -9,8 +9,12 @@ from rest_framework.permissions import *
 class ResourcesHandler(APIView):
     permission_classes = (AllowAny,)
 
-    def get(self, request, *args, **kwargs):
-        resources = Resources.objects.all()
-        serializer = ResourceSerializer(resources, many=True)
+    def get(self, request, pk, *args, **kwargs):
+        if pk is None:
+            resources = Resources.objects.all()
+            serializer = ResourceSerializer(resources, many=True)
+        else:
+            resources = Resources.objects.get(id=pk)
+            serializer = ResourceSerializer(resources)
         return Response(serializer.data)
 
