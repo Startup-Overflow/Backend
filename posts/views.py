@@ -19,13 +19,13 @@ class PostsViewToALL(APIView):
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
 
-class PostsByCategory(APIView):
-    permission_classes = (AllowAny,)
+# class PostsByCategory(APIView):
+#     permission_classes = (AllowAny,)
 
-    def get(self, request, category):
-        posts = Posts.objects.filter(category=category)
-        serializer = PostSerializer(posts, many=True)
-        return Response(serializer.data)
+#     def get(self, request, category):
+#         posts = Posts.objects.filter(category=category)
+#         serializer = PostSerializer(posts, many=True)
+#         return Response(serializer.data)
 
 class CommentViewToALL(APIView):
     permission_classes = (AllowAny,)
