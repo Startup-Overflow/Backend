@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
+from hashtag.models import Hashtag
 
 def superuser(): return User.objects.filter(is_superuser=True)
 
@@ -10,5 +11,6 @@ class BusinessIdea(models.Model):
     doi = models.CharField(max_length=255, unique=True) 
     url = models.CharField(max_length=255, unique=True)
     desc = RichTextField()
+    hashtag = models.ForeignKey(Hashtag)
 
     def __str__(self): return self.title
