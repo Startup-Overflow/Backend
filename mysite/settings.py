@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'questions',
     'noti',
     'ckeditor',
-    'resources'
+    'resources',
+    'catagories'
 ]
 
 MIDDLEWARE = [
