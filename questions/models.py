@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from hashtag.models import Hashtag
 
 class Questions(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    username = models.ForeignKey(User, to_field="username",on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=140, null=True)
     desc = models.TextField(null=True)
     attachment = models.FileField(upload_to='posts/', null=True)

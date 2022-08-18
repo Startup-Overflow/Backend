@@ -23,6 +23,7 @@ class QuestionsView(APIView):
         questions = Questions.objects.all() # filter(id=pk)
 
         serializer = QuestionsSerializer(questions, many=True)
+        print(serializer.data)
         return Response(serializer.data)
     
     def post(self, request, format=None):
