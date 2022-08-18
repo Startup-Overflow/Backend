@@ -16,7 +16,7 @@ class PostsViewToALL(APIView):
 
     def get(self, request, pk):
         posts = Posts.objects.filter(id=pk)
-        serializer = PostSerializer(posts, many=True)
+        serializer = PostDetailsSerializer(posts, many=True)
         return Response(serializer.data)
 
 # class PostsByCategory(APIView):

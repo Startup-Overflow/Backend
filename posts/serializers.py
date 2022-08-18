@@ -7,6 +7,13 @@ class PostSerializer(ModelSerializer):
         # fields = '__all__'
         exclude = ('desc', )
 
+class PostDetailsSerializer(ModelSerializer):
+    class Meta:
+        model = Posts
+        fields = '__all__'
+        # exclude = ('desc', )
+
+
 class CommentSerializer(ModelSerializer):
     class Meta:
         model = Comments
