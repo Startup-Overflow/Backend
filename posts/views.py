@@ -65,8 +65,7 @@ class CommentView(APIView):
             noti = msg,
             post=post
         )
-
-        return Response({"Comment":comment})
+        return Response({"Comment":"commented"})
 
 class PostsViewSet(APIView):
     permission_classes = (AllowAny,)

@@ -3,5 +3,7 @@ from posts.models import *
 
 admin.site.register([
     Posts,
-    Comments
+    Comments,
+    Likes,
+    UnLikes,
 ])

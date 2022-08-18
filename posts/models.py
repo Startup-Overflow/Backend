@@ -15,6 +15,8 @@ class Posts(models.Model):
     post_time = models.TimeField(auto_now=True, null=True)
     post_date = models.DateField(auto_now=True, null=True)
     comment= models.IntegerField(default=0)
+    like = models.IntegerField(default=0)
+    unlike = models.IntegerField(default=0)
     
     def __str__(self):
         return self.title    
@@ -23,16 +25,38 @@ class Posts(models.Model):
         ordering = ['-id']
 
 class Likes(models.Model):
-    username = models.ForeignKey(User, to_field="username", on_delete=models.CASCADE)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
     posts = models.ForeignKey(Posts, on_delete=models.CASCADE)
-    vote = models.TextChoices('vote','Upvote None Downvote')
+
+    class Meta:
+        unique_together = ('username', 'posts',)
 
     def __str__(self):
         return self.posts.title
     
-    # def save(self):
+    def save(self, *args, **kwargs):
+        post = Posts.objects.get(id=self.posts.id)
+        post.like = post.like+1
+        post.save()
+        super(Likes, self).save(*args, **kwargs)
 
+class UnLikes(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    posts = models.ForeignKey(Posts, on_delete=models.CASCADE)
 
+    class Meta:
+        unique_together = ('username', 'posts',)
+
+    def __str__(self):
+        return self.posts.title
+    
+    def save(self, *args, **kwargs):
+        post = Posts.objects.get(id=self.posts.id)
+        post.unlike = post.unlike+1
+        post.save()
+        super(UnLikes, self).save(*args, **kwargs)
+
+ 
 class Comments(models.Model):
     username = models.ForeignKey(User, to_field="username", on_delete=models.CASCADE)
     posts = models.ForeignKey(Posts, on_delete=models.CASCADE)
