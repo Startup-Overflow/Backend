@@ -13,6 +13,7 @@ class Posts(models.Model):
     hashtag = models.ManyToManyField(Hashtag, related_name='plans')
     post_time = models.TimeField(auto_now=True, null=True)
     post_date = models.DateField(auto_now=True, null=True)
+    comment= models.IntegerField(default=0)
     
     def __str__(self):
         return self.title    
