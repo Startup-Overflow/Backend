@@ -4,7 +4,8 @@ from posts.models import *
 class PostSerializer(ModelSerializer):
     class Meta:
         model = Posts
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ('desc', )
 
 class CommentSerializer(ModelSerializer):
     class Meta:
