@@ -15,7 +15,7 @@ class PostsViewToALL(APIView):
     permission_classes = (AllowAny,)
 
     def get(self, request, pk):
-        posts = Posts.objects.filter(id=pk)
+        posts = Posts.objects.get(id=pk)
         serializer = PostDetailsSerializer(posts, many=True)
         return Response(serializer.data)
 
