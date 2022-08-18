@@ -13,12 +13,14 @@ class QuestionsView(APIView):
     # authentication_classes = (TokenAuthentication,)
 
     def get(self, request,pk=None, format=None):
-        hashtags = TagFollow.objects.filter(follower=request.user).values('name')
-        if not pk:
-            questions = Questions.objects.filter(hashtag__in=[i['name'] for i in hashtags])
-            print(questions)
-        else:
-            questions = Questions.objects.filter(id=pk)
+        # hashtags = TagFollow.objects.filter(follower=request.user).values('name')
+        # if not pk:
+        #     questions = Questions.objects.filter(hashtag__in=[i['name'] for i in hashtags])
+        #     print(questions)
+        # else:
+        #     questions = Questions.objects.filter(id=pk)
+
+        questions = Questions.objects.all() # filter(id=pk)
 
         serializer = QuestionsSerializer(questions, many=True)
         return Response(serializer.data)
