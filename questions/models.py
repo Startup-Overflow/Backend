@@ -8,14 +8,22 @@ class Questions(models.Model):
     desc = models.TextField(null=True)
     attachment = models.FileField(upload_to='posts/', null=True)
     hashtag = models.ManyToManyField(Hashtag, related_name="questionhashtag")
+    answer = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
 
 class Answer(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    question = models.ForeignKey(Questions, on_delete=models.CASCADE, null=True)
+    question = models.ForeignKey(Questions, on_delete=models.CASCADE, null=True, related_name="question")
     title = models.CharField(max_length=140, null=True)
     desc = models.TextField(null=True)
     attachment = models.FileField(upload_to='posts/', null=True)
+
+    def save(self, *args, **kwargs):
+        post = Questions.objects.get(id=self.question.id)
+        post.answer = post.answer+1
+        post.save()
+        super(Answer, self).save(*args, **kwargs)
+
 
