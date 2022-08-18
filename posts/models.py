@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from hashtag.models import Hashtag
 from catagories.models import Catagory 
 
+
 class Posts(models.Model):
     username = models.ForeignKey(User, to_field="username", on_delete=models.CASCADE)
     title = models.CharField(max_length=140)
@@ -27,7 +28,10 @@ class Likes(models.Model):
     vote = models.TextChoices('vote','Upvote None Downvote')
 
     def __str__(self):
-        return self.posts.title   
+        return self.posts.title
+    
+    # def save(self):
+
 
 class Comments(models.Model):
     username = models.ForeignKey(User, to_field="username", on_delete=models.CASCADE)
@@ -37,7 +41,13 @@ class Comments(models.Model):
     post_date = models.DateField(auto_now=True, null=True)
 
     def __str__(self):
-        return self.comment   
+        return self.comment
+    
+    def save(self, *args, **kwargs):
+        post = Posts.objects.get(id=self.posts.id)
+        post.comment = post.comment+1
+        post.save()
+        super(Comments, self).save(*args, **kwargs)
 
 class Share(models.Model):
     pass
