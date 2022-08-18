@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,8 +9,8 @@ from questions.models import Questions
 from questions.serializers import QuestionsSerializer
 
 class QuestionsView(APIView):
-    permission_classes = (IsAuthenticated,)
-    authentication_classes = (TokenAuthentication,)
+    permission_classes = (AllowAny,)
+    # authentication_classes = (TokenAuthentication,)
 
     def get(self, request,pk=None, format=None):
         hashtags = TagFollow.objects.filter(follower=request.user).values('name')
