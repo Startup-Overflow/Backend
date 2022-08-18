@@ -14,9 +14,10 @@ import time
 class PostsViewToALL(APIView):
     permission_classes = (AllowAny,)
 
-    def get(self, request, pk):
-        posts = Posts.objects.get(id=pk)
-        serializer = PostDetailsSerializer(posts, many=True)
+    def get(self, request, id):
+        posts = Posts.objects.get(id=id)
+        print(posts)
+        serializer = PostDetailsSerializer(posts)
         return Response(serializer.data)
 
 # class PostsByCategory(APIView):

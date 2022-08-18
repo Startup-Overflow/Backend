@@ -8,7 +8,7 @@ urlpatterns=[
     path('<str:catagory>/',PostsViewSet.as_view()),
     # path('catagory/<str:catagory>/',PostsByCategory.as_view()),
     path('tag/<str:catagory>/',PostByTagView.as_view()),
-    path('view/<int:pk>/',PostsViewToALL.as_view()),
+    path('views/<int:id>/',PostsViewToALL.as_view()),
     path('hashtag/<str:hashtag>/',ViewsByHashtag.as_view()),
     path('mypost/<str:catagory>/',MyArticleView.as_view())
 ]
