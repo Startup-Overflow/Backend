@@ -25,7 +25,7 @@ class QuestionsView(APIView):
             serializer = QuestionsSerializer(questions)
             return Response(serializer.data)
         else:
-            questions = Questions.objects.all() # filter(id=pk)
+            questions = Questions.objects.all().ordered_by('-id') # filter(id=pk)
             serializer = QuestionsSerializer(questions, many=True)
             # print(serializer.data)
             return Response(serializer.data)
