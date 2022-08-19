@@ -2,13 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from hashtag.models import Hashtag
 from catagories.models import Catagory 
-
+from ckeditor.fields import RichTextField
 
 class Posts(models.Model):
     username = models.ForeignKey(User, to_field="username", on_delete=models.CASCADE)
     title = models.CharField(max_length=140)
     short_desc = models.CharField(max_length=500, default=None)
-    desc = models.TextField()
+    desc = RichTextField()
     catagory = models.ForeignKey(Catagory, on_delete=models.CASCADE, max_length=50)
     attachment = models.ImageField(upload_to='posts/', null=True)
     hashtag = models.ManyToManyField(Hashtag, related_name='plans')
