@@ -10,5 +10,6 @@ urlpatterns=[
     path('tag/<str:catagory>/',PostByTagView.as_view()),
     path('views/<int:id>/',PostsViewToALL.as_view()),
     path('hashtag/<str:hashtag>/',ViewsByHashtag.as_view()),
-    path('mypost/<str:catagory>/',MyArticleView.as_view())
+    path('mypost/<str:catagory>/',MyArticleView.as_view()),
+    path('like/<int:id>/', Like.as_view())
 ]

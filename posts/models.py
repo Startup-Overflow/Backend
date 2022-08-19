@@ -37,8 +37,8 @@ class Likes(models.Model):
     def save(self, *args, **kwargs):
         post = Posts.objects.get(id=self.posts.id)
         post.like = post.like+1
-        post.save()
         super(Likes, self).save(*args, **kwargs)
+        post.save()
 
 class UnLikes(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -70,8 +70,8 @@ class Comments(models.Model):
     def save(self, *args, **kwargs):
         post = Posts.objects.get(id=self.posts.id)
         post.comment = post.comment+1
-        post.save()
         super(Comments, self).save(*args, **kwargs)
+        post.save()
 
 class Share(models.Model):
     pass

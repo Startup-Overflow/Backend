@@ -10,7 +10,9 @@ class Profile(models.Model):
     mobile_no = models.CharField(max_length=15,null=True)
     entre = models.BooleanField(default=False)
     mentor = models.BooleanField(default=False)
-    inventor = models.BooleanField(default=False)
+    investor = models.BooleanField(default=False)
+    incubator = models.BooleanField(default=False)
+    partner = models.BooleanField(default=False)
     job_seaker = models.BooleanField(default=False)
 
     def __str__(self):

@@ -36,14 +36,34 @@ class CommentViewToALL(APIView):
         comments = Comments.objects.filter(posts=posts)
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
-  
-  
+
+class Like(APIView):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
+
+    def post(self, request, id, *args, **kwargs):
+        try:
+            post = Posts.objects.get(id=id)
+        except Posts.DoesNotExist:
+            return Response(status=404)
+        
+        try:
+            user = User.objects.get(username=self.request.user)
+        except User.DoesNotExist:
+            return Response(status=404)
+
+        like = Likes.objects.create(username=user, posts=post)
+        like.save()
+        # print(id,self.request.user)
+        # Like.objects.create(username=self.request.user,) 
+        return Response(status=200)
+
 class CommentView(APIView):
     permission_classes = (IsAuthenticated,)
     authentication_classes = (TokenAuthentication,)
 
     def post(self, request, format=None):
-        print("Comment")
+        print(request.data)
         username = User.objects.get(username=request.user)
         posts = Posts.objects.get(id=request.data["id"])
         comment = request.data["addComment"]
