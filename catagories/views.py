@@ -11,7 +11,7 @@ class Learn(APIView):
     permission_classes = (AllowAny,)
     def get(self, request, id=None):
         if id is None:
-            catagory = Catagory.objects.all()
+            catagory = Catagory.objects.exclude(id__in=[14, 15, 16 ])
             serializer = LearnSerializer(catagory, many=True)
             return Response(serializer.data)
         else:
