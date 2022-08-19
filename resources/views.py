@@ -12,7 +12,7 @@ class ResourcesHandler(APIView):
 
     def get(self, request, pk=None, *args, **kwargs):
         if pk is None:
-            resources = Resources.objects.all()
+            resources = Resources.objects.exclude(id__in=[14, 15, 16 ]) #all()
             serializer = ResourceSerializer(resources, many=True)
         else:
             resources = Resources.objects.get(id=pk)
