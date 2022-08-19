@@ -5,3 +5,4 @@ class QuestionsSerializer(ModelSerializer):
     class Meta:
         model = Questions
         fields = '__all__'
+        ordering = ['-id']
