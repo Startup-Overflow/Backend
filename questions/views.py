@@ -20,11 +20,15 @@ class QuestionsView(APIView):
         # else:
         #     questions = Questions.objects.filter(id=pk)
 
-        questions = Questions.objects.all() # filter(id=pk)
-
-        serializer = QuestionsSerializer(questions, many=True)
-        print(serializer.data)
-        return Response(serializer.data)
+        if pk is not None:
+            questions = Questions.objects.get(id=pk)
+            serializer = QuestionsSerializer(questions)
+            return Response(serializer.data)
+        else:
+            questions = Questions.objects.all() # filter(id=pk)
+            serializer = QuestionsSerializer(questions, many=True)
+            # print(serializer.data)
+            return Response(serializer.data)
     
     def post(self, request, format=None):
         hashtag = Hashtag.objects.filter(name__in=request.data["hashtag"])

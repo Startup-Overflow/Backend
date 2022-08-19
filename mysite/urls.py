@@ -13,4 +13,5 @@ urlpatterns = [
     path('resources/',include('resources.urls')),
     path('notifications/',include('noti.urls')),
     path('categories/',include('catagories.urls')),
+    path('ideas/',include('ideas.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

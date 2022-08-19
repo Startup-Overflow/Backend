@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'resources',
     'catagories',
-    'mentors'
+    'mentors',
+    'ideas'
 ]
 
 MIDDLEWARE = [
