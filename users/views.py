@@ -99,13 +99,7 @@ class UserType(APIView):
         except:
             return Response({"msg":"No"})    
 
-        return Response({
-            "user": request.user.username,
-            "entre":profile.entre,
-            "mentor":profile.mentor,
-            "inv":profile.inventor,
-            "job":profile.job_seaker
-        })
+
 
 class UserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
