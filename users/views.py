@@ -10,6 +10,20 @@ from users.models import *
 from users.serializers import *
 from django.db.utils import IntegrityError
 from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+
+
+class LoginView(APIView):
+    permission_classes = (permissions.AllowAny,)  
+    authentication_classes = (TokenAuthentication,)
+
+    def post(self, request, *args, **kwargs):
+        serializer = ObtainAuthToken.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key})
 
 class RegisterView(APIView):
     # Anyone Can Register
@@ -68,8 +82,12 @@ class UserType(APIView):
     authentication_classes = (TokenAuthentication,)
 
     def get(self, request, username=None, format=None):
-        profile = Profile.objects.filter(username=request.user).first()
-        
+        try:
+            profile = Profile.objects.get(username=request.user)
+            
+        except:
+            return Response({"msg":"No"})    
+
         return Response({
             "user": request.user.username,
             "entre":profile.entre,

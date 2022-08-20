@@ -6,8 +6,8 @@ def superuser(): return User.objects.filter(is_superuser=True)
 
 class Profile(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    bio = models.CharField(max_length=250,null=True)
-    mobile_no = models.CharField(max_length=15,null=True)
+    # bio = models.CharField(max_length=250,null=True)
+    # mobile_no = models.CharField(max_length=15,null=True)
     entre = models.BooleanField(default=False)
     mentor = models.BooleanField(default=False)
     investor = models.BooleanField(default=False)

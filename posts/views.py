@@ -53,7 +53,7 @@ class Like(APIView):
             return Response(status=404)
 
         like = Likes.objects.create(username=user, posts=post)
-        like.save()
+        # like.save()
         # print(id,self.request.user)
         # Like.objects.create(username=self.request.user,) 
         return Response(status=200)
