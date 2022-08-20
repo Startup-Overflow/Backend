@@ -84,7 +84,6 @@ class UserType(APIView):
     def get(self, request, username=None, format=None):
         try:
             profile = Profile.objects.get(username=request.user)
-            
             if profile.mentor:
                 return Response({"msg":"mentor"})
             if profile.investor:
@@ -95,11 +94,12 @@ class UserType(APIView):
                 return Response({"msg":"partner"})
             if profile.job_seaker:
                 return Response({"msg":"job_seaker"})
-
         except:
             return Response({"msg":"No"})    
 
-
+    def post(self, request, username=None, format=None):
+        data = request.data
+        print(data)
 
 class UserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
