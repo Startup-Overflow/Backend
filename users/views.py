@@ -85,6 +85,17 @@ class UserType(APIView):
         try:
             profile = Profile.objects.get(username=request.user)
             
+            if profile.mentor:
+                return Response({"msg":"mentor"})
+            if profile.investor:
+                return Response({"msg":"investor"})
+            if profile.incubator:
+                return Response({"msg":"incubator"})
+            if profile.partner:
+                return Response({"msg":"partner"})
+            if profile.job_seaker:
+                return Response({"msg":"job_seaker"})
+
         except:
             return Response({"msg":"No"})    
 
