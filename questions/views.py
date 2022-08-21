@@ -5,8 +5,8 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework import status
 from hashtag.models import TagFollow, Hashtag
-from questions.models import Questions
-from questions.serializers import QuestionsSerializer
+from questions.models import *
+from questions.serializers import AnswerSerializer, QuestionsSerializer
 
 class QuestionsView(APIView):
     permission_classes = (AllowAny,)
@@ -51,3 +51,10 @@ class QuestionsView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class AnswerView(APIView):
+    def get(self, request, pk):
+        answer = Answer.objects.get(id=pk)
+        serializer = AnswerSerializer(answer)
+        return Response(serializer.data)
+        
