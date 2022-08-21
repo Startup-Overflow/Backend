@@ -53,6 +53,8 @@ class QuestionsView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class AnswerView(APIView):
+    permission_classes = (AllowAny,)
+
     def get(self, request, pk):
         answer = Answer.objects.get(id=pk)
         serializer = AnswerSerializer(answer)
