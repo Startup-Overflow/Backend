@@ -57,7 +57,7 @@ class AnswerView(APIView):
 
     def get(self, request, pk):
         question = Questions.objects.get(id=pk)
-        answer = Answer.objects.get(question=question)
-        serializer = AnswerSerializer(answer)
+        answer = Answer.objects.filter(question=question)
+        serializer = AnswerSerializer(answer, many=True)
         return Response(serializer.data)
         
