@@ -56,7 +56,8 @@ class AnswerView(APIView):
     permission_classes = (AllowAny,)
 
     def get(self, request, pk):
-        answer = Answer.objects.get(id=pk)
+        question = Questions.objects.get(id=pk)
+        answer = Answer.objects.get(question=question)
         serializer = AnswerSerializer(answer)
         return Response(serializer.data)
         
