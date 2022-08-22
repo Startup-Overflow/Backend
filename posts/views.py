@@ -114,9 +114,11 @@ class PostsViewSet(APIView):
         catagory = request.data["catagory"]
         hasht = Hashtag.objects.filter(name__in=request.data["hashtag"])
 
-        
+
         if detect_class(desc)!='business':
-            return Response({"Response":"Post is not a related to business"})
+            return Response({"Response":"Your Post is not a related to business"})
+        
+
         a = Posts.objects.create(
             username = username,
             title = title,
