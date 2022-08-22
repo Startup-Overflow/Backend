@@ -10,6 +10,7 @@ from hashtag.models import TagFollow
 from users.models import Follow, Hobbies, Interests, Skills
 from noti.models import Noti
 import time
+from docType.docType import detect_class
 
 class PostsViewToALL(APIView):
     permission_classes = (AllowAny,)
@@ -94,7 +95,6 @@ class PostsViewSet(APIView):
     def get(self, request, catagory=None, format=None):
         followings = Follow.objects.filter(username=request.user)
         post = Posts.objects.filter(username=request.user)
-                
         posts = Posts.objects.all()
         # filter(
         #     username__in=[i.following.username for i in followings]
@@ -113,6 +113,10 @@ class PostsViewSet(APIView):
         short_desc = request.data["shrtdesc"]
         catagory = request.data["catagory"]
         hasht = Hashtag.objects.filter(name__in=request.data["hashtag"])
+
+        
+        if detect_class(desc)!='business':
+            return Response({"Response":"Post is not a related to business"})
         a = Posts.objects.create(
             username = username,
             title = title,
