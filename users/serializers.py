@@ -5,6 +5,11 @@ from rest_framework.serializers import ModelSerializer, StringRelatedField
 from django.contrib.auth.models import User
 from users.models import *
 
+class UserTypeSerializer(ModelSerializer):
+    class Meta:
+        model = UserType
+        fields = '__all__'
+
 class ProfileSerializer(ModelSerializer):
     class Meta:
         model = Profile

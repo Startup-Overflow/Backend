@@ -77,29 +77,26 @@ class LogoutView(APIView):
         request.user.auth_token.delete()
         return Response({"Response":"Logout"})
 
-class UserType(APIView):
+class UserTypeView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (TokenAuthentication,)
 
-    def get(self, request, username=None, format=None):
-        try:
-            profile = Profile.objects.get(username=request.user)
-            if profile.mentor:
-                return Response({"msg":"mentor"})
-            if profile.investor:
-                return Response({"msg":"investor"})
-            if profile.incubator:
-                return Response({"msg":"incubator"})
-            if profile.partner:
-                return Response({"msg":"partner"})
-            if profile.job_seaker:
-                return Response({"msg":"job_seaker"})
-        except:
-            return Response({"msg":"No"})    
 
-    def post(self, request, username=None, format=None):
-        data = request.data
-        print(data)
+    def get(self, request, type=None, format=None):
+        if type is None:
+            profile = UserType.objects.get(username=request.user)
+            return Response({"type":profile.type})
+        data = UserType.objects.filter(type=type)
+        serializer = UserTypeSerializer(data, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        profile = UserType.objects.create(username=request.user, type = request.data["type"])
+        profile.save()
+
+class GetUserProfile(APIView):
+    def get(self, request, type, *args, **kwargs):
+        Profile.objects.filter()
 
 class UserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)

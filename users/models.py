@@ -4,6 +4,10 @@ from hashtag.models import Hashtag
 
 def superuser(): return User.objects.filter(is_superuser=True)
 
+class UserType(models.Model):
+    username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    type = models.CharField(max_length=255, default=None)
+
 class Profile(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     # bio = models.CharField(max_length=250,null=True)
