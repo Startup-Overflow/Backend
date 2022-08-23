@@ -8,3 +8,11 @@ class Resources(models.Model):
 
     def __str__(self):
         return self.title
+
+class Courses(models.Model):
+    title = models.CharField(max_length=255, unique=True)
+    desc = RichTextField()
+
+class Books(models.Model):
+    title = models.CharField(max_length=255, unique=True)
+    desc = RichTextField()

@@ -4,9 +4,11 @@ from hashtag.models import Hashtag
 
 def superuser(): return User.objects.filter(is_superuser=True)
 
+choices = [('Mentor','mentor'),('Entreprenur','entreprenur'), ('Investor','Investor'),('Incubator','incubator'),('Schemes','schemes'),]
+
 class UserType(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    type = models.CharField(max_length=255, default=None)
+    type = models.CharField(max_length=255, choices=choices, default=None)
 
 class Profile(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
