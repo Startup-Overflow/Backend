@@ -10,10 +10,10 @@ choices = [('Mentor','mentor'),('Entreprenur','entreprenur'), ('Investor','Inves
 class UserType(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     type = models.CharField(max_length=255, choices=choices, default=None)
-    desc = RichTextField()
+    desc = RichTextField(default=None, blank=True)
     img = models.ImageField(max_length=255, default=None, upload_to='users/')
-    phone = models.CharField(max_length=10)
-    domain_expert = models.ForeignKey(Hashtag, on_delete=models.CASCADE, related_name='hobby_name', null=True)
+    phone = models.CharField(max_length=10, default=None)
+    domain_expert = models.ForeignKey(Hashtag, default=None, on_delete=models.CASCADE, related_name='domain_expert', null=True)
 
 class Profile(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)

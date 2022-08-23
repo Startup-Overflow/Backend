@@ -15,7 +15,7 @@ class Questions(models.Model):
         return self.title
 
 class Answer(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    username = models.ForeignKey(User, to_field="username", on_delete=models.CASCADE, null=True)
     question = models.ForeignKey(Questions, on_delete=models.CASCADE, null=True, related_name="question")
     title = models.CharField(max_length=140, null=True)
     desc = models.TextField(null=True)
