@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from hashtag.models import Hashtag
+from ckeditor.fields import RichTextField
 
 def superuser(): return User.objects.filter(is_superuser=True)
 
@@ -9,6 +10,10 @@ choices = [('Mentor','mentor'),('Entreprenur','entreprenur'), ('Investor','Inves
 class UserType(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     type = models.CharField(max_length=255, choices=choices, default=None)
+    desc = RichTextField()
+    img = models.ImageField(max_length=255, default=None, upload_to='users/')
+    phone = models.CharField(max_length=10)
+    domain_expert = models.ForeignKey(Hashtag, on_delete=models.CASCADE, related_name='hobby_name', null=True)
 
 class Profile(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)

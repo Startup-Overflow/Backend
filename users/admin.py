@@ -5,5 +5,6 @@ admin.site.register([
     Interests,
     Hobbies,
     Skills,
-    Profile
+    Profile,
+    UserType,
 ])
