@@ -19,7 +19,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Questions, on_delete=models.CASCADE, null=True, related_name="question")
     title = models.CharField(max_length=140, null=True)
     desc = models.TextField(null=True)
-    attachment = models.FileField(upload_to='posts/', null=True)
+    # attachment = models.FileField(upload_to='posts/', null=True)
 
     def save(self, *args, **kwargs):
         post = Questions.objects.get(id=self.question.id)
