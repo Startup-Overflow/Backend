@@ -11,18 +11,7 @@ class ResourceSerializerContent(ModelSerializer):
         model = Resources
         fields = '__all__'
 
-class BookSerializer(ModelSerializer):
+class SchemeCourseBookEventSerializer(ModelSerializer):
     class Meta:
-        model = Books
-        fields = 'title'
-
-class BookSerializerContent(ModelSerializer):
-    class Meta:
-        model = Books
-        fields = '__all__'
-
-class CoursesSerializer(ModelSerializer):
-    class Meta:
-        model = Courses
-        fields = '__all__'
-
+        model = SchemeCourseBookEvent
+        fields = ('title', 'desc')

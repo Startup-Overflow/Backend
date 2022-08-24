@@ -52,12 +52,12 @@ class TagView(APIView):
         if not name:
             return Response({"Response":"Hashtag Does Not Exist"})
         follower = User.objects.filter(username=request.user)
-        hashvalue = str(follower)+str(name)
-        print(hashvalue)
-        checkunique = hashlib.md5(hashvalue.encode())
-        print(checkunique.hexdigest())
+        # hashvalue = str(follower)+str(name)
+        # print(hashvalue)
+        # checkunique = hashlib.md5(hashvalue.encode())
+        # print(checkunique.hexdigest())
         try:
-            a = TagFollow.objects.create(checkunique=checkunique.hexdigest())
+            a = TagFollow.objects.create()
             a.follower.set(follower)
             a.name.set(name)
             a.save()

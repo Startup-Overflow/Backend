@@ -1,6 +1,15 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
+choices = [
+    ('Schemes','Schemes'),
+    ('Course','Course'), 
+    ('Book','Book'),
+    ('Event','Event'),
+    ('TermsAndCondition','TermsAndCondition'),
+    ('PrivacyPolicy','PrivacyPolicy'),
+]
+
 class Resources(models.Model):
     title = models.CharField(max_length=255, unique=True)
     desc = RichTextField()
@@ -9,10 +18,15 @@ class Resources(models.Model):
     def __str__(self):
         return self.title
 
-class Courses(models.Model):
+class SchemeCourseBookEvent(models.Model): 
     title = models.CharField(max_length=255, unique=True)
     desc = RichTextField()
+    type = models.CharField(max_length=255, choices=choices, default=None)
 
-class Books(models.Model):
-    title = models.CharField(max_length=255, unique=True)
-    desc = RichTextField()
+# class Courses(models.Model):
+#     title = models.CharField(max_length=255, unique=True)
+#     desc = RichTextField()
+
+# class Books(models.Model):
+#     title = models.CharField(max_length=255, unique=True)
+#     desc = RichTextField()

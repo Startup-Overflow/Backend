@@ -19,27 +19,15 @@ class ResourcesHandler(APIView):
             serializer = ResourceSerializer(resources)
         return Response(serializer.data)
 
-class CoursesHandler(APIView):
+class SchemeCourseBookEventHandler(APIView):
     permission_classes = (AllowAny,)
 
     def get(self, request, id, *args, **kwargs):
         if id is not None:
-            course = Courses.objects.get(id=id)
-            serializer = ResourceSerializerContent(course)
+            scbe = SchemeCourseBookEvent.objects.get(id=id)
+            serializer = ResourceSerializerContent(scbe)
             return Response(serializer.data)
-        courses = Courses.objects.all()
-        serializer = CoursesSerializer(courses, many=True)
-        return Response(serializer.data)
-        
-class BooksHandler(APIView):
-    permission_classes = (AllowAny,)
-
-    def get(self, request, id, *args, **kwargs):
-        if id is not None:
-            book = Books.objects.get(id=id)
-            serializer = BookSerializerContent(book)
-            return Response(serializer.data)
-        book = Books.objects.all()
-        serializer = BookSerializer(book, many=True)
+        scbe = SchemeCourseBookEvent.objects.all()
+        serializer = SchemeCourseBookEventSerializer(scbe, many=True)
         return Response(serializer.data)
          

@@ -93,6 +93,7 @@ class UserTypeView(APIView):
     def post(self, request, *args, **kwargs):
         profile = UserType.objects.create(username=request.user, type = request.data["type"])
         profile.save()
+        return Response({"MSG":"Done"})
 
 class GetUserProfile(APIView):
     def get(self, request, type, *args, **kwargs):
