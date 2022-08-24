@@ -2,7 +2,7 @@ from urllib import response
 from hashtag.models import *
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import *
 from rest_framework.authentication import TokenAuthentication
 import hashlib
 from django.db.utils import IntegrityError
@@ -27,8 +27,8 @@ class HashTagFollow(APIView):
         return Response({"Response":"Success"})
 
 class TagView(APIView):
-    permission_classes = (IsAuthenticated,)
-    authentication_classes = (TokenAuthentication,)
+    permission_classes = (AllowAny,)
+    # authentication_classes = (TokenAuthentication,)
 
     def get(self, request, pk=None, format=None):
         if pk is None:
@@ -37,13 +37,15 @@ class TagView(APIView):
             return Response(serializer.data)
         else:
             hashtag = Hashtag.objects.get(name=pk)
-            print(hashtag)
-            followers = TagFollow.objects.filter(name=hashtag).values('tag_follower_name')
-            # print([i['name'] for i in followers])
+            # print(hashtag.name)
+            followers = TagFollow.objects. filter(name=hashtag) #.values('follower')
+            # print(followers)
+            followers = [i['follower'] for i in followers.values('follower')]
             print(followers)
-            users = User.objects.filter(username__in=followers)
-            print(users)
-            serializer = TagFollowSerializer(followers, many=True)
+            # print(TagFollow.objects.filter(id__in=[i['id'] for i in followers]))
+            users = User.objects.filter(id__in=followers)
+            print([i.username for i in users])
+            serializer = UserSerializer(users, many=True)
             return Response(serializer.data)
 
     def post(self, request, format=None):
