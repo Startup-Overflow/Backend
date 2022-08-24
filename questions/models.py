@@ -22,7 +22,7 @@ class Answer(models.Model):
     # attachment = models.FileField(upload_to='posts/', null=True)
 
     def __str__(self):
-        return self.username
+        return self.username.username
 
     def save(self, *args, **kwargs):
         post = Questions.objects.get(id=self.question.id)
