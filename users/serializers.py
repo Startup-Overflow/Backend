@@ -7,7 +7,7 @@ from users.models import *
 
 class UserTypeSerializer(ModelSerializer):
     class Meta:
-        model = UserType
+        model = UsersType
         fields = '__all__'
 
 class ProfileSerializer(ModelSerializer):

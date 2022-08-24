@@ -84,9 +84,9 @@ class UserTypeView(APIView):
 
     def get(self, request, type=None, format=None):
         if type is None:
-            profile = UserType.objects.get(username=request.user)
+            profile = UsersType.objects.get(username=request.user)
             return Response({"type":profile.type})
-        data = UserType.objects.filter(type=type)
+        data = UsersType.objects.filter(type=type)
         serializer = UserTypeSerializer(data, many=True)
         return Response(serializer.data)
 
