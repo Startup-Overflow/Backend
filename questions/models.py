@@ -21,8 +21,8 @@ class Answer(models.Model):
     desc = models.TextField(null=True)
     # attachment = models.FileField(upload_to='posts/', null=True)
 
-    def __str__(self):
-        return self.username.username
+    # def __str__(self):
+    #     return self.username.username
 
     def save(self, *args, **kwargs):
         post = Questions.objects.get(id=self.question.id)
