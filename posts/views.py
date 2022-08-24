@@ -95,7 +95,10 @@ class PostsViewSet(APIView):
     def get(self, request, catagory=None, format=None):
         followings = Follow.objects.filter(username=request.user)
         post = Posts.objects.filter(username=request.user)
-        posts = Posts.objects.all()
+
+        tags = TagFollow.objects.filter(follower=User.objects.get(username=request.user))
+        print([i['name'] for i in tags.values('name')])
+        posts = Posts.objects.filter(hashtag__in=[i['name'] for i in tags.values('name')])
         # filter(
         #     username__in=[i.following.username for i in followings]
         #     +[i.username for i in post]
