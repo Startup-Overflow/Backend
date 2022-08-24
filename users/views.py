@@ -91,7 +91,7 @@ class UserTypeView(APIView):
         return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
-        profile = UserType.objects.create(username=request.user, type = request.data["type"])
+        profile = UsersType.objects.create(username=request.user, type = request.data["type"])
         profile.save()
         return Response({"MSG":"Done"})
 
