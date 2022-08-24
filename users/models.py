@@ -19,9 +19,9 @@ class UsersType(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     type = models.CharField(max_length=255, choices=choices, default=None)
     desc = RichTextField(default=None, blank=True)
-    img = models.ImageField(max_length=255, default=None, upload_to='users/')
+    # img = models.ImageField(max_length=255, default=None, upload_to='users/')
     phone = models.CharField(max_length=10, default=None)
-    domain_expert = models.CharField(max_length=50, default=None)
+    # domain_expert = models.CharField(max_length=50, default=None)
 
 class Profile(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
