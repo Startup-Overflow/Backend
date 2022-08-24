@@ -15,7 +15,4 @@ class Hashtag(models.Model):
 class TagFollow(models.Model):
     name = models.ManyToManyField(Hashtag, related_name='tag_name', null=True)
     follower = models.ManyToManyField(User, related_name='tag_follower_name', null=True)
-    # checkunique = models.CharField(max_length=50, unique=True)
-
-    class Meta:
-        unique_together = ('follower', '')
+    checkunique = models.CharField(max_length=50, unique=True)
