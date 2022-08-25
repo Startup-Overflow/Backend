@@ -4,7 +4,7 @@ from resources.models import *
 class ResourceSerializer(ModelSerializer):
     class Meta:
         model = Resources
-        fields = 'title'
+        fields = '__all__'
 
 class ResourceSerializerContent(ModelSerializer):
     class Meta:
