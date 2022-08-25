@@ -18,13 +18,24 @@ class MentorView(APIView):
     permission_classes = (permissions.AllowAny,)  
     authentication_classes = (TokenAuthentication,)
 
-    def get(self, request, *args, **kwargs):
-        Mentor.objects.all()
-        
+    def get(self, request, type=None, *args, **kwargs):
+        # if type is None:
+        #     data = Mentor.objects.all()
+        # else:
+        mentors = Mentor.objects.all() #filter(domain_expert=type)        
+        serializer = MentorSerializer(mentors, many=True)
+    
+        print(serializer.data)
+
+        # if serializer.is_valid():
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data)
+
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
     def post(self, request, format=None):
         request.data["username"] = User.objects.get(username=request.user).id
-        print(request.data)
-
         serializer = MentorSerializer(data=request.data)
         print(serializer.is_valid())
         if serializer.is_valid():
