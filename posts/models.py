@@ -11,7 +11,7 @@ class Posts(models.Model):
     desc = RichTextField()
     catagory = models.ForeignKey(Catagory, on_delete=models.CASCADE, max_length=50)
     # attachment = models.ImageField(upload_to='posts/', null=True)
-    hashtag = models.ManyToManyField(Hashtag, related_name='plans')
+    # hashtag = models.ManyToManyField(Hashtag, related_name='plans')
     post_time = models.TimeField(auto_now=True, null=True)
     post_date = models.DateField(auto_now=True, null=True)
     comment= models.IntegerField(default=0)
