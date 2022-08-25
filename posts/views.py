@@ -93,18 +93,20 @@ class PostsViewSet(APIView):
     authentication_classes = (TokenAuthentication,)
 
     def get(self, request, catagory=None, format=None):
-        followings = Follow.objects.filter(username=request.user)
-        post = Posts.objects.filter(username=request.user)
+        # followings = Follow.objects.filter(username=request.user)
+        # post = Posts.objects.filter(username=request.user)
+        print(request.user)
 
-        tags = TagFollow.objects.filter(follower=User.objects.get(username=request.user))
-        print([i['name'] for i in tags.values('name')])
-        posts = Posts.objects.filter(hashtag__in=[i['name'] for i in tags.values('name')])
-        # filter(
-        #     username__in=[i.following.username for i in followings]
-        #     +[i.username for i in post]
-        # ).filter(catagory=catagory)
+        if request.user.is_authenticated:
+            global tags
+            tags = TagFollow.objects.filter(follower=User.objects.get(username=request.user))
+            print([i['name'] for i in tags.values('name')])
+            posts = Posts.objects.filter(hashtag__in=[i['name'] for i in tags.values('name')])
 
-        print([i for i in posts])
+            print([i for i in posts])
+        else:
+            posts = Posts.objects.all()
+        
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
 
