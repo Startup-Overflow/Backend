@@ -1,3 +1,4 @@
+from xml import dom
 from django.db import models
 from django.contrib.auth.models import User
 from hashtag.models import Hashtag
@@ -14,6 +15,15 @@ choices = [('Mentor','mentor'),('Entreprenur','entreprenur'), ('Investor','Inves
 #     img = models.ImageField(max_length=255, default=None, upload_to='users/')
 #     phone = models.CharField(max_length=10, default=None)
     # domain_expert = models.ForeignKey(Hashtag, default=None, on_delete=models.CASCADE, related_name='domain_expert', null=True)
+
+class Mentor(models.Model):
+    username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    desc = RichTextField(default=None, blank=True)
+    linkedin = models.CharField(max_length=255, blank=True)
+    portfolio = models.CharField(max_length=255, blank=True)
+    professional_mail = models.CharField(max_length=255, blank=True)
+    domain_expert = models.CharField(max_length=255, blank=True)
+    approved = models.BooleanField(default=False)
 
 class UsersType(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)

@@ -1,9 +1,15 @@
 from asyncore import read
-from dataclasses import field
+from dataclasses import field, fields
 from pyexpat import model
 from rest_framework.serializers import ModelSerializer, StringRelatedField
 from django.contrib.auth.models import User
 from users.models import *
+
+class MentorSerializer(ModelSerializer):
+    class Meta:
+        model = Mentor
+        # fields = '__all__'
+        exclude = ('approved',)
 
 class UserTypeSerializer(ModelSerializer):
     class Meta:

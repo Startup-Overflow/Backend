@@ -117,7 +117,7 @@ class PostsViewSet(APIView):
         desc = request.data["desc"]
         short_desc = request.data["shrtdesc"]
         catagory = request.data["catagory"]
-        hasht = Hashtag.objects.filter(name__in=request.data["hashtag"])
+        # hasht = Hashtag.objects.filter(name__in=request.data["hashtag"])
 
 
         if detect_class(desc)!='business':
@@ -131,7 +131,7 @@ class PostsViewSet(APIView):
             catagory = catagory,
             short_desc = short_desc,
         )
-        a.hashtag.set(hasht)
+        # a.hashtag.set(hasht)
         a.save()
 
         return Response({"Response":"Success"})

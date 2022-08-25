@@ -12,5 +12,6 @@ urlpatterns = [
     path('type/',UserTypeView.as_view()),
     path('type/<str:type>',UserTypeView.as_view()),
     path('follow/',FollowView.as_view()),
-    path('get/<str:name>/',GetMeView.as_view())
+    path('get/<str:name>/',GetMeView.as_view()),
+    path('mentors/',MentorView.as_view()),
 ]

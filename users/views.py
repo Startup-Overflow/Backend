@@ -12,7 +12,25 @@ from django.db.utils import IntegrityError
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
+from rest_framework import status
 
+class MentorView(APIView):
+    permission_classes = (permissions.AllowAny,)  
+    authentication_classes = (TokenAuthentication,)
+
+    def get(self, request, *args, **kwargs):
+        Mentor.objects.all()
+        
+    def post(self, request, format=None):
+        request.data["username"] = User.objects.get(username=request.user).id
+        print(request.data)
+
+        serializer = MentorSerializer(data=request.data)
+        print(serializer.is_valid())
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
     permission_classes = (permissions.AllowAny,)  
