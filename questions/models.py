@@ -8,7 +8,7 @@ class Questions(models.Model):
     title = models.CharField(max_length=140, null=True)
     desc = RichTextField(default=None)
     # attachment = models.FileField(upload_to='posts/', null=True)
-    hashtag = models.ManyToManyField(Hashtag, related_name="questionhashtag")
+    # hashtag = models.ManyToManyField(Hashtag, related_name="questionhashtag")
     answer = models.IntegerField(default=0)
 
     def __str__(self):
