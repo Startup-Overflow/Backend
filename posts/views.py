@@ -11,6 +11,7 @@ from users.models import Follow, Hobbies, Interests, Skills
 from noti.models import Noti
 import time
 from docType.docType import detect_class
+from catagories.models import Catagory
 
 class PostsViewToALL(APIView):
     permission_classes = (AllowAny,)
@@ -116,7 +117,7 @@ class PostsViewSet(APIView):
         title = request.data["title"]
         desc = request.data["desc"]
         short_desc = request.data["shrtdesc"]
-        catagory = request.data["catagory"]
+        catagory = Catagory.objects.get(name=request.data["catagory"]) #request.data["catagory"]
         # hasht = Hashtag.objects.filter(name__in=request.data["hashtag"])
 
 
