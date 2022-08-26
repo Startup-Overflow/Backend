@@ -31,14 +31,14 @@ class QuestionsView(APIView):
             return Response(serializer.data)
     
     def post(self, request, format=None):
-        hashtag = Hashtag.objects.filter(name__in=request.data["hashtag"])
+        # hashtag = Hashtag.objects.filter(name__in=request.data["hashtag"])
         a = Questions.objects.create(
             username = request.user,
             title = request.data["title"],
             desc = request.data["desc"],
-            attachment = request.data["attachment"]
+            # attachment = request.data["attachment"]
         )
-        a.hashtag.set(hashtag)
+        # a.hashtag.set(hashtag)
         a.save()
         return Response({"Response":"Data Saved"})
     
