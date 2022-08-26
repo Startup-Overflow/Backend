@@ -36,7 +36,7 @@ class QuestionsView(APIView):
             username = request.user,
             title = request.data["title"],
             desc = request.data["desc"],
-            attachment = request.data["attachment"]
+            # attachment = request.data["attachment"]
         )
         # a.hashtag.set(hashtag)
         a.save()
